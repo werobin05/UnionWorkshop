@@ -1,11 +1,28 @@
 use teloxide::prelude::*;
+use teloxide::types::{KeyboardButton, KeyboardMarkup};
 
 pub async fn start(bot: Bot, msg: Message) -> ResponseResult<()> {
-    bot.send_message(msg.chat.id, "Добро пожаловать! Рады вас видеть. 
-    Для того что бы сделать заказ нажмите на /services
-    Все доступные команды можно просмотреть нажав: /help
-    \n
-    Если возникли вопросы пишите нам на электронную почту")
+    let keyboard = KeyboardMarkup {
+        keyboard: vec![
+            vec![
+                KeyboardButton::new("📦 Услуги"),
+                KeyboardButton::new("❓ F.A.Q"),
+            ],
+            vec![KeyboardButton::new("📩 Написать в поддержку")],
+        ],
+        resize_keyboard: true,
+        one_time_keyboard: false,
+        selective: false,
+        is_persistent: true,
+        input_field_placeholder: "Выберите действие 📍".to_string(),
+    };
+
+    bot.send_message(msg.chat.id, "Добро пожаловать! 👋\n\n\
+        Чтобы сделать заказ, нажмите /services.\n\
+        Доступные команды — /help.\n\n\
+        Если возникли вопросы, напишите нам на почту.")
+        .reply_markup(keyboard)
         .await?;
+
     Ok(())
 }

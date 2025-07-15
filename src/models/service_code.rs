@@ -4,10 +4,10 @@ use strum_macros::{EnumString, Display};
 
 
 #[derive(Debug, Clone, Copy, Serialize, Deserialize, Eq, PartialEq, Display, EnumString, Type)]
-#[sqlx(type_name = "service_type")]
+#[sqlx(type_name = "service_code")]
 #[strum(serialize_all = "snake_case")]
-pub enum ServiceType {
-    #[sqlx(rename = "design")]      Design,
-    #[sqlx(rename = "development")] Development,
-    #[sqlx(rename = "marketing")]   Marketing,
+pub enum ServiceCode {
+    #[sqlx(rename = "design")] Design,
+    #[sqlx(rename = "dev")] Development,
+    #[sqlx(rename = "marketing")] Marketing,
 }

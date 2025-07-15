@@ -3,6 +3,7 @@ use teloxide::utils::command::BotCommands;
 pub mod start;
 pub mod help;
 pub mod services;
+pub mod orders;
 
 
 #[derive(BotCommands, Clone)]
@@ -14,4 +15,6 @@ pub enum Command {
     Help,
     #[command(description = "Список заказов")]
     Services,
+    #[command(description = "Мои заказы")]
+    Orders,
 }

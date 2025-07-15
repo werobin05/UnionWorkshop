@@ -27,7 +27,7 @@ pub async fn callback_handler(bot: Bot, q: CallbackQuery) -> ResponseResult<()> 
             "service_dev" => {
                 let inline_keyboard = InlineKeyboardMarkup::new(vec![
                     vec![InlineKeyboardButton::callback("0️⃣ Telegram bot (5000₽)", "dev_tg")],
-                    vec![InlineKeyboardButton::callback("1️⃣ BackEnd /web/ (от 10000₽)", "dev_beckend")],
+                    vec![InlineKeyboardButton::callback("1️⃣ BackEnd /web/ (от 10000₽)", "dev_backend")],
                     vec![InlineKeyboardButton::callback("2️⃣ DataBase /Data/ (от 5000₽)", "dev_db")],
                     vec![InlineKeyboardButton::callback("3️⃣ Mobile app /mobile/ 15000₽", "dev_mobile")],
                     vec![InlineKeyboardButton::callback("❇️ FullStack /web/ от 20000₽", "dev_full")],

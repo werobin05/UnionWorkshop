@@ -1,5 +1,5 @@
 use teloxide::{prelude::*, utils::command::BotCommands};
-use crate::commands::{Command, start::start, help::help, services::services};
+use crate::commands::{help::help, orders::orders, services::services, start::start, Command};
 
 pub async fn message_handler(bot: Bot, msg: Message) -> ResponseResult<()> {
     if let Some(text) = msg.text() {
@@ -7,8 +7,18 @@ pub async fn message_handler(bot: Bot, msg: Message) -> ResponseResult<()> {
             Ok(Command::Start) => start(bot, msg).await,
             Ok(Command::Help) => help(bot, msg).await,
             Ok(Command::Services) => services(bot, msg).await,
+            Ok(Command::Orders) => orders(bot, msg).await,
             Err(_) => {
-                bot.send_message(msg.chat.id, "Неизвестная команда, нажмите /help для просмотра все доступных команд").await?;
+                match text {
+                    "📦 Услуги" => services(bot, msg).await?,
+                    "❓ F.A.Q" => help(bot, msg).await?,
+                    "📩 Написать в поддержку" => {
+                        bot.send_message(msg.chat.id, "Напишите нам на почту support@example.com").await?;
+                    }
+                    _ => {
+                        bot.send_message(msg.chat.id, "Неизвестная команда, нажмите /help для просмотра всех доступных команд").await?;
+                    }
+                }
                 Ok(())
             }
         }
